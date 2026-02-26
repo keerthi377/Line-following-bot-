@@ -1,6 +1,7 @@
 eYRC Crop Drop Bot  - Task6 
 Team ID: eYRC#1173 
 Authors: Gowri Shankara Narayan, Joshua, Keerthi Sheevani, Nidhi 
+
 Overview
 This project implements line-following robot using Reinforcement Learning (Q-learning) integrated with STM32 HAL drivers.
 The objective of this task is to develop a line-following algorithm (using PID or Reinforcement Learning) with support for line switching, and to demonstrate a complete pick-and-place mechanism within the given arena.
@@ -20,6 +21,7 @@ The robot performs the following tasks:
 •	Places the box in the correct drop location.
 •	Repeats the cycle until all boxes are delivered.
 •	After placing the final box, traverses back to the starting node to indicate completion of the run.
+
 Software Architecture
 Line Detection
 Function: get_state_from_adc()
