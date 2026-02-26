@@ -1,8 +1,10 @@
 eYRC Crop Drop Bot  - Task6 
-Team ID: eYRC#1173 
-Authors: Gowri Shankara Narayan, Joshua, Keerthi Sheevani, Nidhi Krishna 
 
-Overview:
+Team ID: eYRC#1173 
+
+Authors: Gowri Shankara Narayan, Joshua A, Keerthi Sheevani G, Nidhi Krishna D
+
+OVERVIEW
 
 This project implements line-following robot using Reinforcement Learning (Q-learning) integrated with STM32 HAL drivers.
 The objective of this task is to develop a line-following algorithm (using PID or Reinforcement Learning) with support for line switching, and to demonstrate a complete pick-and-place mechanism within the given arena.
@@ -23,14 +25,19 @@ The robot performs the following tasks:
 •	Repeats the cycle until all boxes are delivered.
 •	After placing the final box, traverses back to the starting node to indicate completion of the run.
 
-Software Architecture
-Line Detection
+SOFTWARE ARCHITECTURE
+
+LINE DETECTION
+
 Function: get_state_from_adc()
 This function converts raw sensor readings into a compact 5-bit encoded state representing the robot’s position relative to the line.
+
 Working Principle
+
 •	Reads 5 ADC values from line sensors.
 •	Applies threshold comparison to convert analog values into binary (0 or 1).
 •	Encodes the 5 binary values into a single 5-bit state.
+
 Bit Mapping
 •	Bit4 → Left Corner (LC)
 •	Bit3 → Left (L)
@@ -40,15 +47,22 @@ Bit Mapping
 If the track color is flipped, the state is inverted using:
 state = 31 - state
 This enables seamless switching between white-on-black and black-on-white tracks without changing the Q-table.
+
 Reinforcement Learning Action Selection
+
 Function: choose_action(uint8_t state)
+
 This function implements action selection using a pre-trained Q-table.
+
 Working Principle
+
 •	Takes the current 5-bit state as input.
 •	Reads Q-values corresponding to that state.
 •	Selects the action with the maximum Q-value.
 •	Returns the index of the best action.
+
 Action Mapping
+
 0 → Sharp Left
 1 → Forward
 2 → Sharp Right
@@ -56,28 +70,41 @@ Action Mapping
 4 → Slight Right
 5 → Stop
 This ensures optimal movement decisions based on learned policy.
+
 Motor Control
+
 Function: set_motor(int left, int right)
+
 This function converts high-level motion commands into motor control signals.
+
 Behavior
+
 •	Positive values → Forward rotation
 •	Negative values → Reverse rotation
 •	Separate values are applied to left and right motors.
 To compensate for hardware mismatch between motors, the right motor is slightly scaled:
 right * 11 / 10
+
 Speed Scaling
+
 Motor speeds are globally scaled using:
+
 #define SCALE 90
 This allows overall speed tuning without modifying individual action values.
 Action Execution
+
 Function: execute_action(uint8_t action)
+
 This function maps action indices to motor commands.
+
 Behavior
 •	Each action corresponds to a predefined motor configuration.
 •	Sharp turns include small delay intervals for stable rotation.
 •	Stop action sets both motor speeds to zero.
 This creates smooth and stable navigation behavior.
-Operating Modes
+
+Operating Modes:
+
 The robot operates using a structured multi-mode state machine.
 Mode 1 – Pickup Mode
 Track Type: White line on black background
