@@ -42,7 +42,7 @@ SOFTWARE ARCHITECTURE
 
 LINE DETECTION
 
-Function: get_state_from_adc()
+Function: get_state_from_adc() - 
 This function converts raw sensor readings into a compact 5-bit encoded state representing the robot’s position relative to the line.
 
 Working Principle:
@@ -202,7 +202,7 @@ Boxes must be picked strictly in the following order:
 1.	Red
 2.	Blue
 3.	Green
-4.	
+
 Priority enforcement condition:
 if (box_picked == box_dropped + 1)
 
